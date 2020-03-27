@@ -20,10 +20,14 @@ Sheet1=[temp; % Day
     zeros(size(Schedule_Day_row,1),D-1), Schedule_Day_row, zeros(size(Schedule_Day_row,1),size(temp,2)-size(Schedule_Day_row,2)-D+1); % Scheduling Result
     zeros(2,D-1), Result_Day, zeros(2,size(temp,2)-size(Schedule_Day_row,2)-D+1)]; % 일일생산량 & Scrap 총량
 
-xlswrite('Excel-MATLAB.xlsx',Sheet1,'VIP','N2') % Day
+%xlswrite('Excel-MATLAB.xlsx',Sheet1,'VIP','N2') % Day
+writematrix(Sheet1,'Excel-MATLAB.xlsx','Sheet','VIP','Range','N2');
+
 % xlswrite('Excel-MATLAB.xlsx',temp,'VIP','K3') % Weekday
 % xlswrite('Excel-MATLAB.xlsx',Schedule_Day_row,'VIP','K4') % 스케줄링 결과
-xlswrite('Excel-MATLAB.xlsx',sum(Result_Day(2,:)),'VIP','M1') % 총 scrap 발생량
+%xlswrite('Excel-MATLAB.xlsx',sum(Result_Day(2,:)),'VIP','M1') % 총 scrap 발생량
+writematrix(sum(Result_Day(2,:)),'Excel-MATLAB.xlsx','Sheet','VIP','Range','M1');
+
 
 % 2번째 spreadsheet
 Sheet2=[temp; % Day

@@ -79,4 +79,5 @@ end
 % F_fix = [13];
 % G_fix = [12];
 
+VIP = rmmissing(VIP);
 [m, n] = size(VIP);
