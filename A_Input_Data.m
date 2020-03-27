@@ -1,9 +1,9 @@
 %% Input data
 % VIP size & production amount & rate input
 clear;clc
-%close all
+close all
 
-Y = year2(datetime);
+Y = year(datetime);
 M = month(datetime);
 D = 10; % day(datetime);
 hour = 9;
