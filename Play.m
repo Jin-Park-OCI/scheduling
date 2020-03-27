@@ -1,7 +1,7 @@
 clear;clc
 close all
 
-cd('D:\2. MATLAB Code File\IS VIP Scheduling\TE')
+cd('C:\Users\admin\Documents\MATLAB\VIP\scheduling')
 
 A_Input_Data
 B_Date_Setting
