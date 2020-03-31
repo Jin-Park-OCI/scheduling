@@ -3,7 +3,6 @@
 clear;clc
 close all
 
-
 Y = year(datetime);
 M = month(datetime);
 D = 10; % day(datetime);
@@ -30,25 +29,24 @@ VIP=[1 216 876 12 5000 1500 19; % 35 ->12
     14 216 343 35 2400 800 64];
 %}
 
-%VIP=xlsread('Excel-MATLAB.xlsx','VIP','F4:K103');
-VIP = readmatrix('Excel-MATLAB.xlsx','Sheet','VIP','Range','F4:K103');
+VIP=xlsread('Excel-MATLAB.xlsx','VIP','F4:K103');
 VIP=[zeros(size(VIP,1),1) VIP];
 for i=1:size(VIP,1)
    VIP(i,1) = i;
 end
 
-% 생산완료된 결과 읽어오기
-%VIP_prod = xlsread('Excel-MATLAB.xlsx','VIP','N4:BW103'); % 전체 Excel 결과표 읽기
-VIP_prod = readmatrix('Excel-MATLAB.xlsx','Sheet','VIP','Range','N4:BW103');
-
+%%%%%%%%%%%%%%% 생산완료된 결과 읽어오기
+%{
+VIP_prod = xlsread('Excel-MATLAB.xlsx','VIP','P4:BW103'); % 전체 Excel 결과표 읽기
 %Today_No = D % find(temp==exceltime(datetime('today','Format','MM/dd')));
 VIP_prod(size(VIP_prod,1)-1:size(VIP_prod,1),:) = []; % 일일생산량, scrap정보 지우기
 VIP_prod = VIP_prod(2:size(VIP_prod,1),1:D-1); % 오늘날짜 기준 하루 전까지의 결과만 추출
+
 for i=1:size(VIP_prod,1)
     VIP_prod_sum(i,1) = sum(VIP_prod(i,1:size(VIP_prod,2))); % VIP 제품별로 생산량 합계
 end
-%xlswrite('Excel-MATLAB.xlsx',VIP_prod_sum,'VIP','L4') % 전일까지의 생산량 합계 Excel에 쓰기
-writematrix(VIP_prod_sum,'Excel-MATLAB.xlsx','Sheet','VIP','Range','L4');
+xlswrite('Excel-MATLAB.xlsx',VIP_prod_sum,'VIP','L4') % 전일까지의 생산량 합계 Excel에 쓰기
+%}
 
 % 요청수량에서 실제생산량을 제외한 값
 %{
@@ -61,8 +59,7 @@ end
 %}
 
 % 생산 line 지정 입력
-%Line_fix=xlsread('Excel-MATLAB.xlsx','VIP','E3:E103');  
-Line_fix=readmatrix('Excel-MATLAB.xlsx', 'Sheet','VIP','Range','E3:E103');
+Line_fix=xlsread('Excel-MATLAB.xlsx','VIP','E3:E103');
 Line_fix(1,:)=[];
 Line_fix(isnan(Line_fix))=0;
 E_fix=[]; F_fix=[]; G_fix=[];
@@ -80,5 +77,4 @@ end
 % F_fix = [13];
 % G_fix = [12];
 
-VIP = rmmissing(VIP);
 [m, n] = size(VIP);
